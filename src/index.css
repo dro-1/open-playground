@@ -1,0 +1,35 @@
+@layer custom;
+@import "tailwindcss";
+
+@theme {
+  --font-fredericka: "Fredericka The Great", sans-serif;
+  --font-cinzel: "Cinzel", sans-serif;
+  --font-manrope: "Manrope", sans-serif;
+  --font-baskerville: "Baskervville", sans-serif;
+  --color-persian-orange: #d58b64;
+  --color-ivory: #f9f9ed;
+  --color-raisin-black: #2e282a;
+  --color-purple: #7d82b8;
+}
+
+@layer custom {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html,
+  body,
+  a,
+  button,
+  input,
+  textarea {
+    font-family: Poppins;
+  }
+
+  a,
+  button {
+    cursor: pointer;
+  }
+}
