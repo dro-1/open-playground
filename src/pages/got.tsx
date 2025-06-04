@@ -217,7 +217,7 @@ export const GOT = () => {
               </em>
             </div>
           </div>
-          <p className="font-manrope lg:text-xl text-ivory max-w-[600px] absolute left-5 w-[80%] lg:ml-auto lg:relative lg:right-8 lg:bottom-48 valarText">
+          <p className="font-manrope lg:text-xl text-ivory max-w-[600px] absolute left-5 w-[80%] lg:ml-auto lg:left-[unset] lg:relative lg:right-16 lg:bottom-48 valarText">
             "Valar Morghulis," they say in Braavos - all men must die. It is not
             merely a phrase, but a grim reminder of the fate that binds all
             mortals.
