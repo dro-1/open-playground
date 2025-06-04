@@ -129,7 +129,7 @@ export const GOT = () => {
 
       const split = SplitText.create(".powerText", {
         type: "words",
-        wordDelimiter: "/",
+        wordDelimiter: String.fromCharCode(8205),
         mask: "words",
         ignore: ".quote",
       });
@@ -274,16 +274,19 @@ export const GOT = () => {
               </span>
             </span>
             <span className="block text-2xl lg:text-4xl text-center font-cinzel test">
-              Seize him./ Cut his throat./ Stop./ Wait./ I've changed my mind./
+              Seize him.&#8205; Cut his throat.&#8205; Stop.&#8205; Wait.&#8205;
+              I've changed my mind.&#8205;
             </span>
             <span className="block text-2xl lg:text-4xl text-center font-cinzel">
-              Let him go./ Step back three paces./ Turn around./ Close your
-              eyes./
+              Let him go.&#8205; Step back three paces.&#8205; Turn
+              around.&#8205; Close your eyes.&#8205;
             </span>
             <span className="block text-6xl lg:text-8xl text-center font-cinzel">
-              <span className="font-baskerville uppercase">Power/</span>{" "}
-              <span className="text-4xl lg:text-6xl block lg:inline">is/</span>{" "}
-              <span className="font-baskerville uppercase">Power/</span>{" "}
+              <span className="font-baskerville uppercase">Power&#8205;</span>{" "}
+              <span className="text-4xl lg:text-6xl block lg:inline">
+                is&#8205;
+              </span>{" "}
+              <span className="font-baskerville uppercase">Power&#8205;</span>{" "}
             </span>
           </p>
         </div>
