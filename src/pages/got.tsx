@@ -280,12 +280,12 @@ export const GOT = () => {
             />
           </div>
           <p className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 text-white space-y-4 w-[90%] powerText">
-            <span className="block overflow-hidden absolute -top-20 -left-4">
+            <span className="block overflow-hidden absolute -top-26 lg:-top-20 -left-4">
               <span className="block font-cinzel text-8xl rotate-180 quote quote1 w-full">
                 "
               </span>
             </span>
-            <span className="block overflow-hidden absolute -bottom-24 lg:-bottom-20 -right-4">
+            <span className="block overflow-hidden absolute -bottom-26 lg:-bottom-20 -right-4">
               <span className="block font-cinzel text-8xl quote quote2 w-full">
                 "
               </span>
