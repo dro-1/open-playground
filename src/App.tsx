@@ -1,13 +1,13 @@
 import { Route, Routes } from "react-router-dom";
 import { ROUTES } from "./utils/routes";
-import { Blandine } from "./pages/blandine";
+import { GOT } from "./pages/got";
 import { Homepage } from "./pages/home";
 
 function App() {
   return (
     <Routes>
       <Route path={ROUTES.home} element={<Homepage />} />
-      <Route path={ROUTES.blandine} element={<Blandine />} />
+      <Route path={ROUTES.got} element={<GOT />} />
     </Routes>
   );
 }

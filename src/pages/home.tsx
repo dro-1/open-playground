@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 const pages: { text: string; url: string }[] = [
   {
-    text: "Blandine",
-    url: ROUTES.blandine,
+    text: "GOT",
+    url: ROUTES.got,
   },
 ];
 
