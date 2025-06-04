@@ -194,7 +194,7 @@ export const GOT = () => {
       ScrollTrigger.create({
         trigger: ".container1",
         start: "top top",
-        end: "+=200%",
+        end: "+=220%",
         pin: true,
         pinSpacing: false,
         scrub: true,
