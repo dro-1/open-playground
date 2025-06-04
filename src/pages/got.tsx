@@ -64,7 +64,7 @@ export const GOT = () => {
       scrollTl.to(
         ".dummy",
         {
-          duration: 3,
+          duration: 2.5,
         },
         0
       );
@@ -110,40 +110,54 @@ export const GOT = () => {
         0
       );
 
-      scrollTl.from(
-        ".quote1",
-        {
-          yPercent: -100,
-          duration: 0.1,
-        },
-        1
-      );
-      scrollTl.from(
-        ".quote2",
-        {
-          yPercent: 100,
-          duration: 0.1,
-        },
-        1.1
-      );
-
-      const split = SplitText.create(".powerText", {
+      const powerTextSplit = SplitText.create(".powerText", {
         type: "words",
         wordDelimiter: String.fromCharCode(8205),
         mask: "words",
         ignore: ".quote",
       });
-      scrollTl.addLabel("powerText", 1.2);
+      const powerTextTl = gsap.timeline({ paused: true });
 
-      split.words.forEach((word, idx) => {
-        const duration = 0.8 / split.words.length;
-        scrollTl.from(
+      powerTextTl.from(
+        ".quote1",
+        {
+          yPercent: -100,
+          duration: 0.1,
+        },
+        0
+      );
+      powerTextTl.from(
+        ".quote2",
+        {
+          yPercent: 100,
+          duration: 0.1,
+        },
+        0
+      );
+
+      const idxToPositionMap: Record<number, number> = {
+        0: 0.8,
+        1: 4.9,
+        2: 7,
+        3: 8.5,
+        4: 10.4,
+        5: 11.5,
+        6: 15.4,
+        7: 18.8,
+        8: 21.1,
+        9: 27,
+        10: 28.1,
+        11: 28.4,
+      };
+
+      powerTextSplit.words.forEach((word, idx) => {
+        powerTextTl.from(
           word,
           {
             yPercent: 100,
-            duration,
+            duration: 0.3,
           },
-          `powerText+=${idx * duration}`
+          idxToPositionMap[idx]
         );
       });
 
@@ -159,11 +173,12 @@ export const GOT = () => {
 
       ScrollTrigger.create({
         trigger: ".container1",
-        start: "top -=105%",
+        start: "top -=100%",
         onEnter: () => {
           // Start the Audio
           if (hasUserClicked.current) {
             audioRef.current?.play();
+            powerTextTl.play();
           }
         },
 
@@ -171,13 +186,15 @@ export const GOT = () => {
           // Restart Audio and set duration to zero
           audioRef.current?.pause();
           audioRef.current!.currentTime = 0;
+          powerTextTl.pause();
+          powerTextTl.progress(0);
         },
       });
 
       ScrollTrigger.create({
         trigger: ".container1",
         start: "top top",
-        end: "+=300%",
+        end: "+=200%",
         pin: true,
         pinSpacing: false,
         scrub: true,
@@ -196,7 +213,7 @@ export const GOT = () => {
             Allow Audio
           </button>
         </div>
-        <div className="min-h-screen bg-raisin-black relative overflow-hidden container1 mb-[200vh]">
+        <div className="min-h-screen bg-raisin-black relative overflow-hidden container1 mb-[120vh]">
           <div className="absolute inset-0">
             <div className="absolute inset-0 bg-raisin-black opacity-80" />
             <img className="w-full h-full object-cover" src={bg} alt="" />
