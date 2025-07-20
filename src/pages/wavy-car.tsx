@@ -4,7 +4,7 @@ import ReactLenis from "lenis/react";
 import { useControls } from "leva";
 import { useRef } from "react";
 import * as THREE from "three";
-import image from "@/assets/images/wavy-car/harry-obahor.jpg";
+import image from "@/assets/images/wavy-car/9.jpeg";
 import { useAspect, useTexture } from "@react-three/drei";
 import { MotionValue, transform, useScroll } from "framer-motion";
 
@@ -77,6 +77,9 @@ const Model: React.FC<{ scrollProgress: MotionValue<number> }> = ({
     uPlaneSizes: {
       value: new THREE.Vector2(window.innerWidth, window.innerHeight),
     },
+    vUvScale: {
+      value: new THREE.Vector2(0, 0),
+    },
   });
 
   const { viewport } = useThree();
@@ -84,19 +87,24 @@ const Model: React.FC<{ scrollProgress: MotionValue<number> }> = ({
   useFrame(() => {
     if (!meshRef.current) return;
 
-    const scaleX = transform(
+    const planeWidth = transform(
       scrollProgress.get(),
       [0, 1],
       [scale[0], viewport.width]
     );
-    const scaleY = transform(
+    const planeHeight = transform(
       scrollProgress.get(),
       [0, 1],
       [scale[1], viewport.height]
     );
 
-    meshRef.current.scale.x = scaleX;
-    meshRef.current.scale.y = scaleY;
+    const planeAspectRatioX = planeWidth / planeHeight;
+    const imageAspectRatioX = imageWidth / imageHeight;
+    const planeAspectRatioY = planeHeight / planeWidth;
+    const imageAspectRatioY = imageHeight / imageWidth;
+
+    meshRef.current.scale.x = planeWidth;
+    meshRef.current.scale.y = planeHeight;
 
     const modifiedAmplitude = transform(
       scrollProgress.get(),
@@ -110,6 +118,10 @@ const Model: React.FC<{ scrollProgress: MotionValue<number> }> = ({
     meshRef.current.material.uniforms.uPlaneSizes.value.set(
       window.innerWidth,
       window.innerHeight
+    );
+    meshRef.current.material.uniforms.vUvScale.value.set(
+      Math.min(imageAspectRatioY / planeAspectRatioY, 1),
+      Math.min(imageAspectRatioX / planeAspectRatioX, 1)
     );
   });
 
