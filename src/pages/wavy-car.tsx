@@ -4,9 +4,68 @@ import ReactLenis from "lenis/react";
 import { useControls } from "leva";
 import { useRef } from "react";
 import * as THREE from "three";
-import image from "@/assets/images/wavy-car/9.jpeg";
+import image1 from "@/assets/images/wavy-car/harry-obahor.jpg";
+import image2 from "@/assets/images/wavy-car/osarodion.jpg";
+import image3 from "@/assets/images/wavy-car/yousef.jpg";
 import { useAspect, useTexture } from "@react-three/drei";
 import { MotionValue, transform, useScroll } from "framer-motion";
+
+const imageMap = {
+  image1,
+  image2,
+  image3,
+};
+
+const credits = [
+  <>
+    Photo 1 by{" "}
+    <a
+      className="font-manrope italic"
+      href="https://unsplash.com/@tionist?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+    >
+      Harry Obahor
+    </a>{" "}
+    on{" "}
+    <a
+      className="font-manrope italic"
+      href="https://unsplash.com/photos/an-old-car-is-decorated-with-pink-flowers-iKPGjAIck9s?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+    >
+      Unsplash
+    </a>
+  </>,
+  <>
+    Photo 2 by{" "}
+    <a
+      className="font-manrope italic"
+      href="https://unsplash.com/@slimmanny12?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+    >
+      Osarodion Amenze
+    </a>{" "}
+    on{" "}
+    <a
+      className="font-manrope italic"
+      href="https://unsplash.com/photos/a-man-sits-in-a-chair-with-his-feet-up-cawPUaiDE8I?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+    >
+      Unsplash
+    </a>
+  </>,
+  <>
+    Photo 3 by{" "}
+    <a
+      className="font-manrope italic"
+      href="https://unsplash.com/@yespanioly?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+    >
+      Yousef Espanioly
+    </a>{" "}
+    on{" "}
+    <a
+      className="font-manrope italic"
+      href="https://unsplash.com/photos/seashore-DA_tplYgTow?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
+    >
+      Unsplash
+    </a>
+  </>,
+];
 
 export const WavyCar = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -17,29 +76,24 @@ export const WavyCar = () => {
 
   return (
     <ReactLenis root>
-      <main className="min-h-screen relative bg-[#031414]">
-        <p className="fixed top-0 left-0 text-white mix-blend-difference font-manrope p-4 z-20">
-          Photo by{" "}
-          <a
-            className="font-manrope italic"
-            href="https://unsplash.com/@tionist?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
-          >
-            Harry Obahor
-          </a>{" "}
-          on{" "}
-          <a
-            className="font-manrope italic"
-            href="https://unsplash.com/photos/an-old-car-is-decorated-with-pink-flowers-iKPGjAIck9s?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
-          >
-            Unsplash
-          </a>
-        </p>
+      <main className="min-h-screen relative">
         <div ref={containerRef} className="h-[300vh] relative">
           <div className="h-screen sticky top-0">
             <Scene scrollProgress={scrollYProgress} />
           </div>
         </div>
-        <div className="h-screen"></div>
+        <div className="h-screen flex justify-center items-center">
+          <div className="font-manrope p-4">
+            <h1 className="font-cinzel text-2xl text-center mb-8">Credits</h1>
+            <div>
+              {credits.map((credit, idx) => (
+                <p key={idx} className="font-manrope p-4 z-20">
+                  {credit}
+                </p>
+              ))}
+            </div>
+          </div>
+        </div>
       </main>
     </ReactLenis>
   );
@@ -58,16 +112,21 @@ const Scene: React.FC<{ scrollProgress: MotionValue<number> }> = ({
 const Model: React.FC<{ scrollProgress: MotionValue<number> }> = ({
   scrollProgress,
 }) => {
-  const texture = useTexture(image);
-  const { width: imageWidth, height: imageHeight } = texture.image;
-  const scale = useAspect(imageWidth, imageHeight, 0.3);
-
   const meshRef = useRef<any>(null);
-  const { amplitude, frequency, speed } = useControls({
+  const { amplitude, frequency, speed, image } = useControls({
     amplitude: { value: 0.25, min: 0, max: 2, step: 0.1 },
     frequency: { value: 17, min: 0, max: 50, step: 0.5 },
     speed: { value: 0.03, min: 0, max: 0.5, step: 0.005 },
+    image: {
+      options: ["image1", "image2", "image3"],
+      value: "image1",
+    },
   });
+
+  const texture = useTexture(imageMap[image]);
+  const { width: imageWidth, height: imageHeight } = texture.image;
+  const scale = useAspect(imageWidth, imageHeight, 0.3);
+
   const uniforms = useRef({
     uTime: { value: speed },
     uAmplitude: { value: amplitude },
@@ -115,6 +174,7 @@ const Model: React.FC<{ scrollProgress: MotionValue<number> }> = ({
     meshRef.current.material.uniforms.uTime.value += speed;
     meshRef.current.material.uniforms.uAmplitude.value = modifiedAmplitude;
     meshRef.current.material.uniforms.uFrequency.value = frequency;
+    meshRef.current.material.uniforms.uTexture.value = texture;
     meshRef.current.material.uniforms.uPlaneSizes.value.set(
       window.innerWidth,
       window.innerHeight
