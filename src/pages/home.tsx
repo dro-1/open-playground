@@ -6,6 +6,10 @@ const pages: { text: string; url: string }[] = [
     text: "GOT",
     url: ROUTES.got,
   },
+  {
+    text: "Wavy Car",
+    url: ROUTES.wavyCar,
+  },
 ];
 
 export const Homepage = () => {
