@@ -10,7 +10,7 @@ import image3 from "@/assets/images/wavy-car/yousef.jpg";
 import { useAspect, useTexture } from "@react-three/drei";
 import { MotionValue, transform, useScroll } from "framer-motion";
 
-const imageMap = {
+const imageMap: Record<string, string> = {
   image1,
   image2,
   image3,
@@ -112,7 +112,7 @@ const Scene: React.FC<{ scrollProgress: MotionValue<number> }> = ({
 const Model: React.FC<{ scrollProgress: MotionValue<number> }> = ({
   scrollProgress,
 }) => {
-  const meshRef = useRef<any>(null);
+  const meshRef = useRef<THREE.Mesh>(null);
   const { amplitude, frequency, speed, image } = useControls({
     amplitude: { value: 0.25, min: 0, max: 2, step: 0.1 },
     frequency: { value: 17, min: 0, max: 50, step: 0.5 },
@@ -171,15 +171,16 @@ const Model: React.FC<{ scrollProgress: MotionValue<number> }> = ({
       [amplitude, 0]
     );
 
-    meshRef.current.material.uniforms.uTime.value += speed;
-    meshRef.current.material.uniforms.uAmplitude.value = modifiedAmplitude;
-    meshRef.current.material.uniforms.uFrequency.value = frequency;
-    meshRef.current.material.uniforms.uTexture.value = texture;
-    meshRef.current.material.uniforms.uPlaneSizes.value.set(
+    const shaderMaterial = meshRef.current.material as THREE.ShaderMaterial;
+    shaderMaterial.uniforms.uTime.value += speed;
+    shaderMaterial.uniforms.uAmplitude.value = modifiedAmplitude;
+    shaderMaterial.uniforms.uFrequency.value = frequency;
+    shaderMaterial.uniforms.uTexture.value = texture;
+    shaderMaterial.uniforms.uPlaneSizes.value.set(
       window.innerWidth,
       window.innerHeight
     );
-    meshRef.current.material.uniforms.vUvScale.value.set(
+    shaderMaterial.uniforms.vUvScale.value.set(
       Math.min(imageAspectRatioY / planeAspectRatioY, 1),
       Math.min(imageAspectRatioX / planeAspectRatioX, 1)
     );
