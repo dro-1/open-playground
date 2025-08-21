@@ -13,6 +13,7 @@ export const NowPlaying = () => {
   const fetchCurrentTrack = async () => {
     const spotifyId = import.meta.env.VITE_SPOTIFY_ID;
     const spotifySecret = import.meta.env.VITE_SPOTIFY_SECRET;
+    const spotifyRefreshToken = import.meta.env.VITE_SPOTIFY_REFRESH_TOKEN;
 
     const authString = `${spotifyId}:${spotifySecret}`;
     const base64AuthString = btoa(authString);
@@ -20,9 +21,7 @@ export const NowPlaying = () => {
       "https://accounts.spotify.com/api/token",
       {
         grant_type: "refresh_token",
-        scope: "user-read-currently-playing",
-        refresh_token:
-          "AQD70EMwR3UFiAEpBVjAwJjyG1sPsHPq50w9IrqDydizPFujAW2Ig8UzueDxSJlTrWUUDOeIuRleIbCyFAVBdAOKHGLLV8qo5Abycr2hFFigImeSdgwugzyp1Ivotejg7Ic",
+        refresh_token: spotifyRefreshToken,
       },
       {
         headers: {
