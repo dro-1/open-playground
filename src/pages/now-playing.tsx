@@ -29,6 +29,7 @@ export const NowPlaying = () => {
           Authorization: `Basic ${base64AuthString}`,
           "Content-Type": "application/x-www-form-urlencoded",
         },
+        withCredentials: true,
       }
     );
 
@@ -43,7 +44,6 @@ export const NowPlaying = () => {
     );
 
     let songTitle, artistsName, songImageUrl;
-    console.log(nowPlayingRes);
     if (nowPlayingRes.status === 204) {
       songTitle = "No song is currently playing.";
       artistsName = "Nil";
