@@ -1,54 +1,75 @@
-# React + TypeScript + Vite
+# Open Creative Playground
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A creative React playground for experimenting with interactive visuals, shaders, and audio. Built with Vite, TypeScript, and Tailwind CSS.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Interactive 3D scenes using Three.js
+- Custom GLSL shaders (see `src/shaders/`)
+- Audio visualizations and now-playing integration
+- Modern UI with Tailwind CSS
+- Modular page structure for easy prototyping
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Prerequisites
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- Node.js (v16 or newer recommended)
+- npm or yarn
+
+### Installation
+
+```bash
+npm install
+# or
+yarn install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Running the Dev Server
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+npm run dev
+# or
+yarn dev
 ```
+
+Open [http://localhost:5173](http://localhost:5173) in your browser to view the app.
+
+### Building for Production
+
+```bash
+npm run build
+# or
+yarn build
+```
+
+### Project Structure
+
+```
+public/           # Static assets
+src/
+  assets/         # Images, audio, etc.
+  pages/          # Main app pages (e.g., wavy-car, got, home)
+  shaders/        # GLSL shader code
+  utils/          # Utility functions
+  App.tsx         # Main app component
+  main.tsx        # Entry point
+```
+
+## Notable Pages
+
+- `/wavy-car` — 3D wavy car mesh with custom shader
+- `/now-playing` — Animated now-playing widget with circular shimmer loading
+  - To set up your own Spotify API for this page, see this helpful guide: [Getting the Currently Playing Song from Spotify](https://khalilstemmler.com/articles/tutorials/getting-the-currently-playing-song-spotify/)
+- `/got` — Game of Thrones themed visuals
+
+## Custom Shaders
+
+GLSL shaders are in `src/shaders/`. See `wavy-car-shader.ts` for an example of a vertex and fragment shader.
+
+## License
+
+MIT
+
+---
+Made with ❤️ for creative coding.
