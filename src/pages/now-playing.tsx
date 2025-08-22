@@ -1,11 +1,7 @@
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { SplitText } from "gsap/SplitText";
 import { useEffect, useRef, useState } from "react";
 import spotifySvg from "@/assets/icons/spotify.svg";
 import axios from "axios";
 
-gsap.registerPlugin(useGSAP, SplitText);
 export const NowPlaying = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [imageUrl, setImageUrl] = useState("");
@@ -84,6 +80,7 @@ export const NowPlaying = () => {
   };
 
   useEffect(() => {
+    fetchCurrentTrack();
     setInterval(fetchCurrentTrack, 3000);
   }, []);
 
