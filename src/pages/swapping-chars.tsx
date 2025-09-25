@@ -132,66 +132,66 @@ export const SwappingChars = () => {
 
   useGSAP(
     () => {
-      const toggleCharacter = (textSplit: SplitText): gsap.core.Timeline => {
-        const randomCharIdx = gsap.utils.random(
-          0,
-          textSplit.chars.length - 1,
-          1
-        );
-        const randomDirection = gsap.utils.random(directions);
+      // const toggleCharacter = (textSplit: SplitText): gsap.core.Timeline => {
+      //   const randomCharIdx = gsap.utils.random(
+      //     0,
+      //     textSplit.chars.length - 1,
+      //     1
+      //   );
+      //   const randomDirection = gsap.utils.random(directions);
 
-        const randomChar = textSplit.chars[randomCharIdx];
-        const char = (
-          textSplit.chars[randomCharIdx] as HTMLElement
-        ).innerText[0].toLowerCase();
+      //   const randomChar = textSplit.chars[randomCharIdx];
+      //   const char = (
+      //     textSplit.chars[randomCharIdx] as HTMLElement
+      //   ).innerText[0].toLowerCase();
 
-        const spanHTMLString = `
-            <span class="font-fredericka absolute uppercase  ${
-              randomDirection == "TOP" ? "top-full left-0" : ""
-            } ${randomDirection == "LEFT" ? "top-0 left-full" : ""} ${
-          randomDirection == "RIGHT" ? "top-0 -left-full" : ""
-        } ${
-          randomDirection == "BOTTOM" ? "-top-full left-0" : ""
-        } " style="font-size: ${
-          frederickaFontSize[char].size
-        }px; transform: translate(${frederickaFontSize[char].x ?? 0}px, ${
-          frederickaFontSize[char].y ?? 0
-        }px)">${char}</span>
-        `;
-        const template = document.createElement("template");
-        template.innerHTML = spanHTMLString;
-        const ghostSpan = template.content.firstElementChild;
+      //   const spanHTMLString = `
+      //       <span class="font-fredericka absolute uppercase  ${
+      //         randomDirection == "TOP" ? "top-full left-0" : ""
+      //       } ${randomDirection == "LEFT" ? "top-0 left-full" : ""} ${
+      //     randomDirection == "RIGHT" ? "top-0 -left-full" : ""
+      //   } ${
+      //     randomDirection == "BOTTOM" ? "-top-full left-0" : ""
+      //   } " style="font-size: ${
+      //     frederickaFontSize[char].size
+      //   }px; transform: translate(${frederickaFontSize[char].x ?? 0}px, ${
+      //     frederickaFontSize[char].y ?? 0
+      //   }px)">${char}</span>
+      //   `;
+      //   const template = document.createElement("template");
+      //   template.innerHTML = spanHTMLString;
+      //   const ghostSpan = template.content.firstElementChild;
 
-        randomChar.appendChild(ghostSpan!);
-        const tl = gsap.timeline({ onComplete: () => ghostSpan?.remove() });
-        tl.fromTo(
-          randomChar,
-          { yPercent: 0, xPercent: 0 },
-          {
-            yPercent:
-              randomDirection == "TOP"
-                ? -100
-                : randomDirection == "BOTTOM"
-                ? 100
-                : undefined,
-            xPercent:
-              randomDirection == "LEFT"
-                ? -100
-                : randomDirection == "RIGHT"
-                ? 100
-                : undefined,
-          }
-        ).to(
-          randomChar,
-          {
-            yPercent: 0,
-            xPercent: 0,
-          },
-          ">1"
-        );
+      //   randomChar.appendChild(ghostSpan!);
+      //   const tl = gsap.timeline({ onComplete: () => ghostSpan?.remove() });
+      //   tl.fromTo(
+      //     randomChar,
+      //     { yPercent: 0, xPercent: 0 },
+      //     {
+      //       yPercent:
+      //         randomDirection == "TOP"
+      //           ? -100
+      //           : randomDirection == "BOTTOM"
+      //           ? 100
+      //           : undefined,
+      //       xPercent:
+      //         randomDirection == "LEFT"
+      //           ? -100
+      //           : randomDirection == "RIGHT"
+      //           ? 100
+      //           : undefined,
+      //     }
+      //   ).to(
+      //     randomChar,
+      //     {
+      //       yPercent: 0,
+      //       xPercent: 0,
+      //     },
+      //     ">1"
+      //   );
 
-        return tl;
-      };
+      //   return tl;
+      // };
       const toggleCharacterWithCharacter = (
         randomChar: HTMLElement,
         onComplete: () => void
@@ -251,83 +251,83 @@ export const SwappingChars = () => {
 
         return tl;
       };
-      const toggleCharacterTest = (
-        textSplit: SplitText,
-        direction: string
-      ): gsap.core.Timeline => {
-        const randomCharIdx = gsap.utils.random(
-          0,
-          textSplit.chars.length - 1,
-          1
-        );
+      // const toggleCharacterTest = (
+      //   textSplit: SplitText,
+      //   direction: string
+      // ): gsap.core.Timeline => {
+      //   const randomCharIdx = gsap.utils.random(
+      //     0,
+      //     textSplit.chars.length - 1,
+      //     1
+      //   );
 
-        const randomChar = textSplit.chars[randomCharIdx];
-        const char = (
-          textSplit.chars[randomCharIdx] as HTMLElement
-        ).innerText[0].toLowerCase();
+      //   const randomChar = textSplit.chars[randomCharIdx];
+      //   const char = (
+      //     textSplit.chars[randomCharIdx] as HTMLElement
+      //   ).innerText[0].toLowerCase();
 
-        const spanHTMLString = `
-            <span class="font-fredericka absolute uppercase select-none ${
-              direction == "TOP" ? "top-full left-0" : ""
-            } ${direction == "LEFT" ? "top-0 left-full" : ""} ${
-          direction == "RIGHT" ? "top-0 -left-full" : ""
-        } ${
-          direction == "BOTTOM" ? "-top-full left-0" : ""
-        } " style="font-size: ${
-          frederickaFontSize[char].size
-        }px; transform: translate(${frederickaFontSize[char].x ?? 0}px, ${
-          frederickaFontSize[char].y ?? 0
-        }px)">${char}</span>
-        `;
-        const template = document.createElement("template");
-        template.innerHTML = spanHTMLString;
-        const ghostSpan = template.content.firstElementChild;
+      //   const spanHTMLString = `
+      //       <span class="font-fredericka absolute uppercase select-none ${
+      //         direction == "TOP" ? "top-full left-0" : ""
+      //       } ${direction == "LEFT" ? "top-0 left-full" : ""} ${
+      //     direction == "RIGHT" ? "top-0 -left-full" : ""
+      //   } ${
+      //     direction == "BOTTOM" ? "-top-full left-0" : ""
+      //   } " style="font-size: ${
+      //     frederickaFontSize[char].size
+      //   }px; transform: translate(${frederickaFontSize[char].x ?? 0}px, ${
+      //     frederickaFontSize[char].y ?? 0
+      //   }px)">${char}</span>
+      //   `;
+      //   const template = document.createElement("template");
+      //   template.innerHTML = spanHTMLString;
+      //   const ghostSpan = template.content.firstElementChild;
 
-        randomChar.appendChild(ghostSpan!);
-        const tl = gsap.timeline({});
-        for (const direction of directions) {
-          if (direction == "TOP") {
-            tl.set(ghostSpan, { top: "100%", left: 0 }, "<1.5");
-          }
-          if (direction == "LEFT") {
-            tl.set(ghostSpan, { top: 0, left: "100%" }, "<1.5");
-          }
-          if (direction == "RIGHT") {
-            tl.set(ghostSpan, { top: 0, left: "-100%" }, "<1.5");
-          }
-          if (direction == "BOTTOM") {
-            tl.set(ghostSpan, { top: "-100%", left: 0 }, "<1.5");
-          }
+      //   randomChar.appendChild(ghostSpan!);
+      //   const tl = gsap.timeline({});
+      //   for (const direction of directions) {
+      //     if (direction == "TOP") {
+      //       tl.set(ghostSpan, { top: "100%", left: 0 }, "<1.5");
+      //     }
+      //     if (direction == "LEFT") {
+      //       tl.set(ghostSpan, { top: 0, left: "100%" }, "<1.5");
+      //     }
+      //     if (direction == "RIGHT") {
+      //       tl.set(ghostSpan, { top: 0, left: "-100%" }, "<1.5");
+      //     }
+      //     if (direction == "BOTTOM") {
+      //       tl.set(ghostSpan, { top: "-100%", left: 0 }, "<1.5");
+      //     }
 
-          tl.fromTo(
-            randomChar,
-            { yPercent: 0, xPercent: 0 },
-            {
-              yPercent:
-                direction == "TOP"
-                  ? -100
-                  : direction == "BOTTOM"
-                  ? 100
-                  : undefined,
-              xPercent:
-                direction == "LEFT"
-                  ? -100
-                  : direction == "RIGHT"
-                  ? 100
-                  : undefined,
-            }
-          ).to(
-            randomChar,
-            {
-              yPercent: 0,
-              xPercent: 0,
-            },
-            ">1"
-          );
-        }
+      //     tl.fromTo(
+      //       randomChar,
+      //       { yPercent: 0, xPercent: 0 },
+      //       {
+      //         yPercent:
+      //           direction == "TOP"
+      //             ? -100
+      //             : direction == "BOTTOM"
+      //             ? 100
+      //             : undefined,
+      //         xPercent:
+      //           direction == "LEFT"
+      //             ? -100
+      //             : direction == "RIGHT"
+      //             ? 100
+      //             : undefined,
+      //       }
+      //     ).to(
+      //       randomChar,
+      //       {
+      //         yPercent: 0,
+      //         xPercent: 0,
+      //       },
+      //       ">1"
+      //     );
+      //   }
 
-        return tl;
-      };
+      //   return tl;
+      // };
 
       SplitText.create("p", {
         type: "words, chars",
