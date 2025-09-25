@@ -14,6 +14,14 @@ const pages: { text: string; url: string }[] = [
     text: "Now Playing",
     url: ROUTES.nowPlaying,
   },
+  {
+    text: "Swapping Chars",
+    url: ROUTES.swappingChars,
+  },
+  {
+    text: "Ripple Background",
+    url: ROUTES.rippleBg,
+  },
 ];
 
 export const Homepage = () => {
